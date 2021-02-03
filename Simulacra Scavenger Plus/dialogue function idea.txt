@@ -1,0 +1,3 @@
+idea for dialogue function
+use read from text files to set the dialogue and read the next line to change the next dialogue
+do the same for dialogue the players dialog choices.  
