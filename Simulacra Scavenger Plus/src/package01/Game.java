@@ -2,7 +2,8 @@ package package01;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import package02.Monster_SecurityAI;
+import package02.Weapon_Blaster;
 public class Game 
 {
 	ChoiceHandler choiceHandler = new ChoiceHandler();
@@ -48,6 +49,10 @@ public class Game
 				case "c4":
 					story.selectPosition(nextPosition4);
 					break;
+					
+	
+					
+					
 				}
 						
 			}

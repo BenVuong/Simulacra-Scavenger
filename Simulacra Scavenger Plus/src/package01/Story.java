@@ -1,8 +1,11 @@
 package package01;
 
-import java.util.Random;
+
+
+import package02.Monster_SecurityAI;
 
 import package02.Weapon_Blaster;
+
 
 public class Story 
 {
@@ -10,6 +13,8 @@ public class Story
 	UI ui;
 	VisibilityManager vm;
 	Player player = new Player();
+	Monster_SecurityAI ai = new Monster_SecurityAI();
+	Weapon_Blaster blaster = new Weapon_Blaster();
 	
 	public Story(Game g, UI userInterface, VisibilityManager vManager )
 	{
@@ -45,6 +50,12 @@ public class Story
 			break;
 		case "encounterChest":
 			encounterChest();
+			break;
+		case "fight":
+			fight();
+			break;
+		case "shoot":
+			shoot();
 			break;
 		
 		
@@ -84,14 +95,49 @@ public class Story
 	public void encounterRobot()
 	{
 		ui.mainTextArea.setText("You encounter a security AI\n\nWhat do you do?");
-		ui.choice1.setText(">>");
+		ai.currentHealth = ai.maxHealth;
+		ui.choice1.setText("Fight it");
+		game.nextPosition1= "fight";
 		ui.choice2.setText("Leave");
 		game.nextPosition2 = "exit";
 		ui.choice3.setText("");
 		ui.choice4.setText("");
-		continueExplore();
+		//continueExplore();
 	}
 	
+	public void fight()
+	{
+		
+		ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth());
+		ui.choice1.setText("Shoot");
+		game.nextPosition1 = "shoot";
+		ui.choice2.setText("Leave");
+		game.nextPosition2 = "exit";
+		ui.choice3.setText("");
+		ui.choice4.setText("");
+		
+	}
+	
+	public void shoot()
+	{
+		if(ai.currentHealth>0)
+		{
+			int blasterDamage = blaster.getDamage();
+			ai.currentHealth -= blasterDamage;
+			ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth()+"\n"
+					+ "You shot the Ai for "+ blasterDamage+" damage");
+		}
+		if (ai.currentHealth<=0) {
+			ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth()+"\n"
+					+ "You Win");
+			ui.choice1.setText(">>");
+			continueExplore();
+		}
+		
+		
+		
+		
+	}
 	
 	public void encounterAI()
 	{
