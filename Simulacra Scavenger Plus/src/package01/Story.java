@@ -57,6 +57,13 @@ public class Story
 		case "shoot":
 			shoot();
 			break;
+		case "enemyAttack":
+			enemyAttack();
+			break;
+		case "title":
+			vm.showTitleScreen();
+			defaultSetup();
+			break;
 		
 		
 		}
@@ -126,16 +133,40 @@ public class Story
 			ai.currentHealth -= blasterDamage;
 			ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth()+"\n"
 					+ "You shot the Ai for "+ blasterDamage+" damage");
+			ui.choice1.setText(">>");
+			game.nextPosition1 = "enemyAttack";
 		}
-		if (ai.currentHealth<=0) {
+		if (ai.currentHealth<=0) 
+		{
 			ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth()+"\n"
 					+ "You Win");
 			ui.choice1.setText(">>");
 			continueExplore();
 		}
+	}
 		
 		
+	public void enemyAttack()
+	{
 		
+		if(ai.currentHealth>0)
+		{
+			int enemyDamage = ai.getDamage();
+			player.hp -= enemyDamage;
+			ui.hpLabel.setText("Hp: "+ player.hp);
+			ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth()+"\n"
+					+ "The AI zapped you for "+ enemyDamage+" damage");
+			ui.choice1.setText("Shoot");
+			game.nextPosition1 = "shoot";
+			
+		}
+		
+		if(player.hp<=0)
+		{
+			ui.mainTextArea.setText("You Died");
+			ui.choice1.setText("Restart");
+			game.nextPosition1= "title";
+		}
 		
 	}
 	
