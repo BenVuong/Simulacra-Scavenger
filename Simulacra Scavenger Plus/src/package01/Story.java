@@ -118,7 +118,7 @@ public class Story
 		
 	}
 	
-	public void shoot()
+	public void shoot()//deal damage to ai
 	{
 		if(ai.currentHealth>0)
 		{
