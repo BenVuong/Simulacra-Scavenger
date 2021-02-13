@@ -7,7 +7,7 @@ public class Monster_SecurityAI
 	public int  maxHealth = 30, currentHealth = 30;
 	public int getDamage()
 	{
-		damage = (int)(Math.random()*((10-5)+1)+5);
+		damage = (int)(Math.random()*((10-1)+1)+1);
 		return damage;
 	}
 	public void resetHealth(int maxHealth )

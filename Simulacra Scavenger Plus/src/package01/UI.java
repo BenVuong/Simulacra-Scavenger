@@ -14,7 +14,7 @@ public class UI
 	JFrame window;
     Container container;
     JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel;
-    JLabel titleNameLabel,hpLabel, hpLabelNum, weaponLabel, weaponLabelName;
+    JLabel titleNameLabel,hpLabel, hpLabelNum, weaponLabel, tokenLabel;
     Font titleFont = new Font("Agency FB",Font.PLAIN, 60);
     Font normalFont = new Font("Times New Roman",Font.PLAIN,30);
     JButton startButton,choice1,choice2,choice3,choice4 ;
@@ -71,7 +71,7 @@ public class UI
 		        
 		        //Game Screen
 		        playerPanel = new JPanel();
-		        playerPanel.setBounds(100,15,600,50);
+		        playerPanel.setBounds(100,15,700,50);
 		        playerPanel.setBackground(Color.BLACK);
 		        playerPanel.setLayout(new GridLayout(1,4));
 		        container.add(playerPanel);
@@ -87,9 +87,17 @@ public class UI
 		        weaponLabel.setBackground(Color.BLACK);
 		        weaponLabel.setForeground(Color.WHITE);
 		        playerPanel.add(weaponLabel);
+		        
+		        tokenLabel = new JLabel();
+		        tokenLabel.setFont(normalFont);
+		        tokenLabel.setBackground(Color.BLACK);
+		        tokenLabel.setForeground(Color.WHITE);
+		        playerPanel.add(tokenLabel);
+		        
 		       
 		        hpLabel.setText("Hp: ");
 		    	weaponLabel.setText("Weapon: ");
+		    	
 		        
 		        
 		        mainTextPanel = new JPanel();

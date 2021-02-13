@@ -3,8 +3,8 @@ package package01;
 
 
 import package02.Monster_SecurityAI;
-
 import package02.Weapon_Blaster;
+import package02.Item_Token;
 
 
 public class Story 
@@ -15,6 +15,7 @@ public class Story
 	Player player = new Player();
 	Monster_SecurityAI ai = new Monster_SecurityAI();
 	Weapon_Blaster blaster = new Weapon_Blaster();
+	Item_Token token = new Item_Token();
 	
 	public Story(Game g, UI userInterface, VisibilityManager vManager )
 	{
@@ -29,7 +30,8 @@ public class Story
 		player.hp = 20;
 		ui.hpLabel.setText("Hp: "+ player.hp);
 		player.currentWeapon = new Weapon_Blaster();
-		ui.weaponLabel.setText("Current Weapon: "+ player.currentWeapon.name);
+		ui.weaponLabel.setText("Current: "+ player.currentWeapon.name);
+		ui.tokenLabel.setText("Token: 0");
 		
 	}
 	
@@ -158,15 +160,19 @@ public class Story
 					+ "The AI zapped you for "+ enemyDamage+" damage");
 			ui.choice1.setText("Shoot");
 			game.nextPosition1 = "shoot";
+			if(player.hp<=0)
+			{
+				ui.mainTextArea.setText(""+ai.getName()+"'s health: "+ ai.getHealth()+"\n"
+						+ "The AI zapped you for "+ enemyDamage+" damage"+"\nYou Died");
+				ui.choice1.setText("Restart");
+				game.nextPosition1= "title";
+				ui.choice2.setText("");
+				game.nextPosition2 = "";
+			}
 			
 		}
 		
-		if(player.hp<=0)
-		{
-			ui.mainTextArea.setText("You Died");
-			ui.choice1.setText("Restart");
-			game.nextPosition1= "title";
-		}
+		
 		
 	}
 	
@@ -184,7 +190,10 @@ public class Story
 	
 	public void encounterChest()
 	{
-		ui.mainTextArea.setText("You found a chest filled with Etherium tokens");
+		int numTokenGained;
+		numTokenGained = token.getToken();
+		ui.tokenLabel.setText("Token: "+(player.numTokens+=numTokenGained));
+		ui.mainTextArea.setText("You found a chest filled with Etherium tokens\nYou gained " +numTokenGained+" tokens");
 		ui.choice1.setText(">>");
 		ui.choice2.setText("Leave");
 		game.nextPosition2 = "exit";
